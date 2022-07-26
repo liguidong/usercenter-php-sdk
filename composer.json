@@ -1,0 +1,31 @@
+{
+    "name": "cjrb/dawuhan-php-usercenter-sdk",
+    "description": "Cjrb User Center SDK for PHP, PHP>=5.4.0",
+    "type": "library",
+    "require": {
+        "php": ">=5.4",
+        "ircmaxell/password-compat": "dev-master"
+    },
+    "require-dev": {
+        "php": ">=5.4",
+        "ircmaxell/password-compat": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "UserCenter\\": "src/UserCenter",
+            "UserCenter\\tests\\": "tests/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "UserCenter\\tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "liguidong",
+            "email": "liguidong94@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
