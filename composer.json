@@ -4,11 +4,11 @@
     "type": "library",
     "require": {
         "php": ">=5.4",
-        "ircmaxell/password-compat": "~1.0"
+        "ircmaxell/password-compat": "*"
     },
     "require-dev": {
         "php": ">=5.4",
-        "ircmaxell/password-compat": "~1.0"
+        "ircmaxell/password-compat": "*"
     },
     "autoload": {
         "psr-4": {
@@ -26,6 +26,5 @@
             "name": "liguidong",
             "email": "liguidong94@gmail.com"
         }
-    ],
-    "minimum-stability": "stable"
+    ]
 }
