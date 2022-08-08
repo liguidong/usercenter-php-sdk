@@ -1,4 +1,4 @@
-![cjrb-logo.png](https://s2.loli.net/2022/07/28/hFkaXf2yPOZvRIJ.png)
+![logo.png](https://s2.loli.net/2022/08/05/NR3hvjk7A2OI1fD.png)
 
 # CJRB用户中心
 
@@ -45,11 +45,16 @@ print_r($response);
   - [x] 批量同步用户信息
   - [x] 修改密码
   - [x] 换绑手机
-
+  - [x] 换绑邮箱
+  - [x] 修改用户资料
+  - [x] 密码加密
+  
 * 订单
   - [ ] 获取订单列表
   - [ ] 新增订单
   - [ ] 更新订单
+* 其他
+  - [x] sign生成
 
 
 

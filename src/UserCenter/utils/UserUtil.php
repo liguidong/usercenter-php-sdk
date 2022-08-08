@@ -69,7 +69,7 @@ class UserUtil extends AbstractUtil
      */
     public function modifyPwd($token, $openid, $password)
     {
-        return (new HttpUtil())->post('/api/user/batchSync', [
+        return (new HttpUtil())->post('/api/user/modifyPwd', [
             'access_token' => $token,
             'openid' => $openid,
             'password' => $password,
@@ -90,5 +90,44 @@ class UserUtil extends AbstractUtil
             'openid' => $openid,
             'mobile' => $mobile,
         ]);
+    }
+
+    /**
+     * 换绑Email
+     * @param $token
+     * @param $openid
+     * @param $email
+     * @return array
+     */
+    public function bindEmail($token, $openid, $email)
+    {
+        return (new HttpUtil())->get('/api/user/bindEmail', [
+            'access_token' => $token,
+            'openid' => $openid,
+            'email' => $email,
+        ]);
+    }
+
+    /**
+     * 修改用户资料
+     * @param $token
+     * @param $openid
+     * @param $info
+     * info支持字段为： nickname,gender,avatar,birthdate,realname,idType,idNumber
+     * @return mixed
+     */
+    public function modifyInfo($token,$openid,$info)
+    {
+        return (new HttpUtil())->get('/api/user/modifyInfo', array_merge(['token'=>$token],$info));
+    }
+
+    /**
+     * 密码加密 bcrypt
+     * @param $password
+     * @return false|string|null
+     */
+    public function passwordEncrypt($password)
+    {
+        return password_hash($password, PASSWORD_BCRYPT);
     }
 }

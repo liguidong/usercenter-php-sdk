@@ -18,18 +18,6 @@ class HttpUtil
         return $this->request($uri, 'post', $params);
     }
 
-    private function _sign($params)
-    {
-        ksort($params);
-        $sign = Config::getInstance()->getAppSecret();
-        foreach ($params as $k => $v) {
-            $sign .= $k . $v;
-        }
-        $sign = md5($sign . Config::getInstance()->getAppSecret());
-
-        return strtoupper($sign);
-    }
-
     private function _getUrl($uri, $method = 'get', $params = [])
     {
         $this->time = time();
@@ -39,7 +27,7 @@ class HttpUtil
         $query_params              = [];
         $query_params['appkey']    = $params['appkey'] = Config::getInstance()->getAppKey();
         $query_params['timestamp'] = $params['timestamp'] = $this->time;
-        $query_params['sign']      = $params['sign'] = $this->_sign($params);
+        $query_params['sign']      = $params['sign'] = AuthUtil::sign($params);
         if ($method == 'get') {
             $query_params = array_merge($params, $query_params);
         }

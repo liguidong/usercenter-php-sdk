@@ -47,7 +47,7 @@ class TestUtil
     public function modifyPwd()
     {
         $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))
-            ->modifyPwd('bearer-92cf26f3-66ae-4681-b08f-f492e3ded5f4', 'openid', 'password');
+            ->modifyPwd('bearer-e842819a-f442-41f4-bdec-007dc3c318d0', '748908935037059072', '123123');
         print_r($response);
     }
 
@@ -55,6 +55,35 @@ class TestUtil
     {
         $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))
             ->bindMobile('bearer-92cf26f3-66ae-4681-b08f-f492e3ded5f4', 'openid', '13099998888');
+        print_r($response);
+    }
+
+    public function bindEmail()
+    {
+        $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))
+            ->bindEmail('bearer-e842819a-f442-41f4-bdec-007dc3c318d0', '748908935037059072', 'liguidong94@gmail.com');
+        print_r($response);
+    }
+
+    public function modifyInfo()
+    {
+        $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))
+            ->modifyInfo('bearer-e842819a-f442-41f4-bdec-007dc3c318d0', '748908935037059072', [
+                'nickname' => '飞天小女警',
+                'gender' => 2,
+                'avatar' => 'https://t8.baidu.com/it/u=2580395625,86315079&fm=74&app=80&size=f256,256&n=0&f=JPEG&fmt=auto?sec=1659718800&t=0a0d9dd00be4efa2555498f2d95d611d',
+                'birthdate' => '1996-06-07',
+                'realname' => '南希',
+                'idType' => 1,
+                'idNumber' => '110225199606076127',
+            ]);
+        print_r($response);
+    }
+
+    public function passwordEncrypt()
+    {
+        $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))
+            ->passwordEncrypt('123456');
         print_r($response);
     }
 }
