@@ -22,15 +22,27 @@ class TestUtil
         print_r($response);
     }
 
+    public function refreshToken()
+    {
+        $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))->refreshToken('2f7db09947674402a005374023140771');
+        print_r($response);
+    }
+
+    public function checkToken()
+    {
+        $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))->checkToken('2f7db09947674402a005374023140771','748908935037059072');
+        print_r($response);
+    }
+
     public function getUserInfo()
     {
-        $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))->info('bearer-92cf26f3-66ae-4681-b08f-f492e3ded5f4');
+        $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))->info('748908934999310336-741216953560989696-28ac3428c74c455ab442acf07847236a','748908934999310336');
         print_r($response);
     }
 
     public function getIdentityInfo()
     {
-        $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))->identityInfo('bearer-92cf26f3-66ae-4681-b08f-f492e3ded5f4');
+        $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))->identityInfo('bearer-92cf26f3-66ae-4681-b08f-f492e3ded5f4','123123');
         print_r($response);
     }
 

@@ -21,29 +21,58 @@ class UserUtil extends AbstractUtil
     }
 
     /**
-     * 用户信息
-     * @param $token
+     * 通过refresh_token 刷新 token
+     * @param $refresh_token
      * @return mixed
      */
-    public function info($token)
+    public function refreshToken($refresh_token)
     {
-        return (new HttpUtil())->get('/api/user/info', ['access_token' => $token]);
+        return (new HttpUtil())->get('/authz/oauth/v20/refresh_token', [
+            'grant_type' => 'refresh_token',
+            'refresh_token' => $refresh_token,
+        ]);
+    }
+
+    /**
+     * 校验token
+     * @param $token
+     * @param $openid
+     * @return mixed
+     */
+    public function checkToken($token,$openid)
+    {
+        return (new HttpUtil())->get('/authz/oauth/v20/check_token', [
+            'openid' => $openid,
+            'token' => $token,
+        ]);
+    }
+
+    /**
+     * 用户信息
+     * @param $token
+     * @param $openid
+     * @return array
+     */
+    public function info($token, $openid)
+    {
+        return (new HttpUtil())->get('/api/user/info', ['access_token' => $token, 'openid' => $openid]);
     }
 
     /**
      * 用户身份信息
      * @param $token
-     * @return mixed
+     * @param $openid
+     * @return array
      */
-    public function identityInfo($token)
+    public function identityInfo($token, $openid)
     {
-        return (new HttpUtil())->get('/api/user/identityInfo', ['access_token' => $token]);
+        return (new HttpUtil())->get('/api/user/identityInfo', ['access_token' => $token, 'openid' => $openid]);
     }
 
     /**
      * 批量同步用户
      * @param $items array
-     * @return void
+     * @return array
      */
     public function batchSync($items)
     {
@@ -72,7 +101,7 @@ class UserUtil extends AbstractUtil
         return (new HttpUtil())->post('/api/user/modifyPwd', [
             'access_token' => $token,
             'openid' => $openid,
-            'password' => $password,
+            'password' => password_hash($password, PASSWORD_BCRYPT),
         ]);
     }
 
@@ -118,7 +147,7 @@ class UserUtil extends AbstractUtil
      */
     public function modifyInfo($token,$openid,$info)
     {
-        return (new HttpUtil())->get('/api/user/modifyInfo', array_merge(['token'=>$token],$info));
+        return (new HttpUtil())->get('/api/user/modifyInfo', array_merge(['token' => $token, 'openid' => $openid], $info));
     }
 
     /**

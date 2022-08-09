@@ -40,6 +40,8 @@ print_r($response);
 
 * 用户
   - [x] 获取AccessToken
+  - [x] 刷新Token
+  - [x] 校验Token
   - [x] 获取用户信息
   - [x] 获取用户身份信息
   - [x] 批量同步用户信息
