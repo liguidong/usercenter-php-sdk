@@ -17,7 +17,7 @@ class AuthUtil
         ksort($params);
         $sign = Config::getInstance()->getAppSecret();
         foreach ($params as $k => $v) {
-            $sign .= $k . $v;
+            $sign .= $k . urlencode($v);
         }
         $sign = md5($sign . Config::getInstance()->getAppSecret());
 

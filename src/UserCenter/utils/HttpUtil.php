@@ -21,13 +21,13 @@ class HttpUtil
     private function _getUrl($uri, $method = 'get', $params = [])
     {
         $this->time = time();
-        foreach ($params as &$value) {
-            $value = urlencode($value);
-        }
         $query_params              = [];
         $query_params['appkey']    = $params['appkey'] = Config::getInstance()->getAppKey();
         $query_params['timestamp'] = $params['timestamp'] = $this->time;
         $query_params['sign']      = $params['sign'] = AuthUtil::sign($params);
+        foreach ($params as &$value) {
+            $value = urlencode($value);
+        }
         if ($method == 'get') {
             $query_params = array_merge($params, $query_params);
         }
