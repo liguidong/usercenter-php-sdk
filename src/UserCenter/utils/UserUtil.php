@@ -43,7 +43,7 @@ class UserUtil extends AbstractUtil
     {
         return (new HttpUtil())->get('/authz/oauth/v20/check_token', [
             'openid' => $openid,
-            'token' => $token,
+            'access_token' => $token,
         ]);
     }
 
@@ -147,7 +147,7 @@ class UserUtil extends AbstractUtil
      */
     public function modifyInfo($token,$openid,$info)
     {
-        return (new HttpUtil())->get('/api/user/modifyInfo', array_merge(['token' => $token, 'openid' => $openid], $info));
+        return (new HttpUtil())->post('/api/user/modifyInfo', array_merge(['access_token' => $token, 'openid' => $openid], $info));
     }
 
     /**
