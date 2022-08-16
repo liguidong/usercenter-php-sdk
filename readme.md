@@ -30,7 +30,7 @@ $response = (new UserUtil($baseUrl, $appKey, $appSecret))->getToken('code');
 print_r($response);
 ```
 
-更多接入信息请查阅 [接口文档](https://thoughts.aliyun.com/share/62d4b2b11e1eca001b40834c#title=用户中心技术文档) ，SDK更多使用方法请查看 [测试用例](/tests/TestUtil.php)
+更多接入信息请查阅 [接口文档](https://thoughts.aliyun.com/share/62d4b2b11e1eca001b40834c#title=用户中心技术文档) ，SDK更多使用方法请查看 [测试用例](/tests/utils/TestUtil.php)
 
 
 

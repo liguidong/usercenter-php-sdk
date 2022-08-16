@@ -114,7 +114,7 @@ class UserUtil extends AbstractUtil
      */
     public function bindMobile($token, $openid, $mobile)
     {
-        return (new HttpUtil())->get('/api/user/bindMobile', [
+        return (new HttpUtil())->post('/api/user/bindMobile', [
             'access_token' => $token,
             'openid' => $openid,
             'mobile' => $mobile,
@@ -130,7 +130,7 @@ class UserUtil extends AbstractUtil
      */
     public function bindEmail($token, $openid, $email)
     {
-        return (new HttpUtil())->get('/api/user/bindEmail', [
+        return (new HttpUtil())->post('/api/user/bindEmail', [
             'access_token' => $token,
             'openid' => $openid,
             'email' => $email,

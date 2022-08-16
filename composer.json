@@ -2,6 +2,7 @@
     "name": "cjrb/dawuhan-php-usercenter-sdk",
     "description": "Cjrb User Center SDK for PHP, PHP>=5.4.0",
     "type": "library",
+    "license": "MIT",
     "require": {
         "php": ">=5.4",
         "ircmaxell/password-compat": "*"
