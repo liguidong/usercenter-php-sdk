@@ -159,4 +159,19 @@ class UserUtil extends AbstractUtil
     {
         return password_hash($password, PASSWORD_BCRYPT);
     }
+
+    /**
+     * 删除用户
+     * @param $user
+     * @param string $type (mobile/email)
+     * @return array|bool
+     */
+    public function deleteUser($user, $type = 'mobile')
+    {
+        if (!in_array($type,['mobile','email'])) {
+            return false;
+        }
+        $params[$type] = $user;
+        return (new HttpUtil())->get('/api/user/deleteUser', $params);
+    }
 }

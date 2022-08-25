@@ -6,7 +6,6 @@ use UserCenter\config\Config;
 
 class HttpUtil
 {
-    private $time;
 
     public function get($uri, $params)
     {
@@ -20,10 +19,10 @@ class HttpUtil
 
     private function _getUrl($uri, $method = 'get', $params = [])
     {
-        $this->time = time();
+        $time                      = time();
         $query_params              = [];
         $query_params['appkey']    = $params['appkey'] = Config::getInstance()->getAppKey();
-        $query_params['timestamp'] = $params['timestamp'] = $this->time;
+        $query_params['timestamp'] = $params['timestamp'] = $time;
         $query_params['sign']      = $params['sign'] = AuthUtil::sign($params);
         foreach ($params as &$value) {
             $value = urlencode($value);
@@ -71,10 +70,36 @@ class HttpUtil
         curl_close($ch);
         $ret = json_decode($result, true);
 
-        //如果是上传，完毕后清理上传文件
+        //清理上传文件
         if (isset($params_file_path)) {
             unlink($params_file_path);
         }
+        //后置操作
+        $this->_after($url, $request_params, $method, $ret);
+
         return $ret;
+    }
+
+    /**
+     * 后置操作
+     * @param $url
+     * @param $request_params
+     * @param $method
+     * @param $ret
+     * @return void
+     */
+    private function _after($url, $request_params, $method, $ret)
+    {
+        if (Config::getInstance()->getDebug()) {
+            $log_file = '/tmp/user_center_' . date('Ym') . '.log';
+            @file_put_contents($log_file, '[time] ' . date('Y-m-d H:i:s') . PHP_EOL, FILE_APPEND);
+            @file_put_contents($log_file, '[url] ' . $url . PHP_EOL, FILE_APPEND);
+            @file_put_contents($log_file, '[method] ' . $method . PHP_EOL, FILE_APPEND);
+            @file_put_contents($log_file, '[params] ' . PHP_EOL, FILE_APPEND);
+            @file_put_contents($log_file, var_export($request_params, true) . PHP_EOL, FILE_APPEND);
+            @file_put_contents($log_file, '[response] ' . PHP_EOL, FILE_APPEND);
+            @file_put_contents($log_file, var_export($ret, true) . PHP_EOL, FILE_APPEND);
+            @file_put_contents($log_file, '-------------------------------' . PHP_EOL, FILE_APPEND);
+        }
     }
 }

@@ -92,6 +92,13 @@ class TestUtil
         print_r($response);
     }
 
+    public function deleteUser()
+    {
+        $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))
+            ->deleteUser('13899990000');
+        print_r($response);
+    }
+
     public function passwordEncrypt()
     {
         $response = (new UserUtil($this->baseUrl, $this->appKey, $this->appSecret))

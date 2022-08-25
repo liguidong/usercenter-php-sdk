@@ -24,6 +24,12 @@ class Config
      */
     private static $appSecret = '';
 
+    /**
+     * 是否开启debug
+     * @var bool
+     */
+    private static $debug = false;
+
 
     private function __construct()
     {
@@ -76,5 +82,15 @@ class Config
     public function getAppSecret()
     {
         return self::$appSecret;
+    }
+
+    public function setDebug($debug)
+    {
+        self::$debug = $debug;
+    }
+
+    public function getDebug()
+    {
+        return self::$debug;
     }
 }
